@@ -1,0 +1,13 @@
+name: 'Slacklog action'
+description: 'Send a changelog of recent PR to the Slack channel'
+author: 'Evgeny Klimenchenko'
+branding:
+  icon: 'code'
+  color: 'blue'
+inputs:
+  SLACK_TOKEN:
+    description: 'Slack token to be able to post in the channel'
+    required: true
+runs:
+  using: 'node12'
+  main: 'index.js'
