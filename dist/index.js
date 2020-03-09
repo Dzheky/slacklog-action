@@ -1413,7 +1413,7 @@ function run() {
                     if ((_c = (_b = (_a = github.context) === null || _a === void 0 ? void 0 : _a.payload) === null || _b === void 0 ? void 0 : _b.commits) === null || _c === void 0 ? void 0 : _c.length) {
                         console.log(context.payload.commits);
                         context.payload.commits.forEach(function (commit) {
-                            message += "[" + commit.id.substring(0, 6) + "] " + commit.message;
+                            message += "[<" + commit.url + "|" + commit.id.substring(0, 6) + ">] " + commit.message;
                         });
                         slack.chat.postMessage({
                             text: message,

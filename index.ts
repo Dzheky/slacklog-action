@@ -43,7 +43,7 @@ async function run() {
       if (github.context?.payload?.commits?.length) {
         console.log(context.payload.commits)
         context.payload.commits.forEach((commit: Commit) => {
-          message += `[${commit.id.substring(0, 6)}] ${commit.message}`
+          message += `[<${commit.url}|${commit.id.substring(0, 6)}>] ${commit.message}`
         })
 
         slack.chat.postMessage({
