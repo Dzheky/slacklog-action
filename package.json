@@ -1,0 +1,13 @@
+{
+  "name": "slacklog-action",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:Dzheky/slacklog-action.git",
+  "author": "Evgeny Klimechenko <Zklimenchenko@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@actions/core": "^1.2.3",
+    "@actions/github": "^2.1.1",
+    "@slack/web-api": "^5.8.0"
+  }
+}
