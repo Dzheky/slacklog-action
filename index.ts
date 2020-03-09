@@ -17,7 +17,7 @@ const EVENTS = {
 }
 
 async function getSlackToken() {
-  return await (new WebClient()).auth.v2.access({
+  return await (new WebClient())?.oauth?.v2?.access({
     client_id: slackClientId,
     client_secret: slackClientSecret,
   })
@@ -26,7 +26,8 @@ async function getSlackToken() {
 
 async function run() {
   const access = await getSlackToken()
-  if (!access && !access.access_token) {
+  console.log(JSON.stringify(access))
+  if (!access || !access.access_token) {
     core.error('Wrong slack credentials! 😞')
     return
   }

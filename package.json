@@ -8,7 +8,7 @@
   "scripts": {
     "ts": "tsc index.ts",
     "ncc": "ncc build",
-    "build": "yarn ts && yarn ncc && rm -rf index.js"
+    "build": "rm -rf ./dist && yarn ts && yarn ncc && rm -rf index.js"
   },
   "dependencies": {
     "@actions/core": "^1.2.3",
