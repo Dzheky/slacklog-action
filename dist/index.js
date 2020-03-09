@@ -1427,7 +1427,7 @@ function run() {
                     access = _d.sent();
                     console.log(JSON.stringify(access));
                     if (!access || !access.access_token) {
-                        core.error('Wrong slack credentials! 😞');
+                        core.setFailed('😞Wrong slack credentials!😞');
                         return [2 /*return*/];
                     }
                     slack = new WebClient(access.access_token);

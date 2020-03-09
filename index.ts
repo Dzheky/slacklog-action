@@ -28,7 +28,7 @@ async function run() {
   const access = await getSlackToken()
   console.log(JSON.stringify(access))
   if (!access || !access.access_token) {
-    core.error('Wrong slack credentials! 😞')
+    core.setFailed('😞Wrong slack credentials!😞')
     return
   }
   const slack = new WebClient(access.access_token)
