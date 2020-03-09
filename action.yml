@@ -5,8 +5,11 @@ branding:
   icon: 'code'
   color: 'blue'
 inputs:
-  SLACK_TOKEN:
-    description: 'Slack token to be able to post in the channel'
+  SLACK_CLIENT_ID:
+    description: 'Slack client ID to be able to post in the channel'
+    required: true
+  SLACK_CLIENT_SECRET:
+    description: 'Slack client Secret to be able to post in the channel'
     required: true
   GITHUB_TOKEN:
     description: 'Github token to access the pullrequests'
