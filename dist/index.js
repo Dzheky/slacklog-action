@@ -1393,8 +1393,7 @@ var github = __webpack_require__(469);
 var core = __webpack_require__(470);
 var WebClient = __webpack_require__(114).WebClient;
 var githubToken = core.getInput('GITHUB_TOKEN');
-var slackClientSecret = core.getInput('SLACK_CLIENT_SECRET');
-var slackClientId = core.getInput('SLACK_CLIENT_ID');
+var slackClientToken = core.getInput('SLACK_CLIENT_TOKEN');
 var slackChannel = 'CUQ1CMWRY';
 var octokit = new github.GitHub(githubToken);
 var context = github.context;
@@ -1402,45 +1401,21 @@ var EVENTS = {
     PUSH: 'push',
     PULL_REQUEST: 'pull_request'
 };
-function getSlackToken() {
-    var _a, _b, _c;
-    return __awaiter(this, void 0, void 0, function () {
-        return __generator(this, function (_d) {
-            switch (_d.label) {
-                case 0: return [4 /*yield*/, ((_c = (_b = (_a = (new WebClient())) === null || _a === void 0 ? void 0 : _a.oauth) === null || _b === void 0 ? void 0 : _b.v2) === null || _c === void 0 ? void 0 : _c.access({
-                        client_id: slackClientId,
-                        client_secret: slackClientSecret
-                    }))];
-                case 1: return [2 /*return*/, _d.sent()];
-            }
-        });
-    });
-}
 function run() {
     var _a, _b, _c;
     return __awaiter(this, void 0, void 0, function () {
-        var access, slack;
+        var slack;
         return __generator(this, function (_d) {
-            switch (_d.label) {
-                case 0: return [4 /*yield*/, getSlackToken()];
-                case 1:
-                    access = _d.sent();
-                    console.log(JSON.stringify(access));
-                    if (!access || !access.access_token) {
-                        core.setFailed('😞Wrong slack credentials!😞');
-                        return [2 /*return*/];
+            slack = new WebClient(slackClientToken);
+            slack.chat.postMessage('Hello world', slackChannel);
+            switch (context.eventName) {
+                case EVENTS.PUSH:
+                    if ((_c = (_b = (_a = github.context) === null || _a === void 0 ? void 0 : _a.payload) === null || _b === void 0 ? void 0 : _b.commits) === null || _c === void 0 ? void 0 : _c.length) {
+                        console.log(context.payload.commits);
                     }
-                    slack = new WebClient(access.access_token);
-                    slack.chat.postMessage('Hello world', slackChannel);
-                    switch (context.eventName) {
-                        case EVENTS.PUSH:
-                            if ((_c = (_b = (_a = github.context) === null || _a === void 0 ? void 0 : _a.payload) === null || _b === void 0 ? void 0 : _b.commits) === null || _c === void 0 ? void 0 : _c.length) {
-                                console.log(context.payload.commits);
-                            }
-                    }
-                    console.log(context);
-                    return [2 /*return*/];
             }
+            console.log(context);
+            return [2 /*return*/];
         });
     });
 }
