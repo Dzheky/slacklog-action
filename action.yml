@@ -8,6 +8,9 @@ inputs:
   SLACK_CLIENT_TOKEN:
     description: 'Slack client token to be able to post in the channel'
     required: true
+  SLACK_CHANNEL_ID:
+    description: 'Slack channel id'
+    required: true
   GITHUB_TOKEN:
     description: 'Github token to access the pullrequests'
     required: true

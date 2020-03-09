@@ -4,7 +4,7 @@ const { WebClient } = require('@slack/web-api')
 
 const githubToken = core.getInput('GITHUB_TOKEN')
 const slackClientToken = core.getInput('SLACK_CLIENT_TOKEN')
-const slackChannel = 'CUQ1CMWRY'
+const slackChannel = core.getInput('SLACK_CHANNEL_ID')
 
 const octokit = new github.GitHub(githubToken)
 const context = github.context
