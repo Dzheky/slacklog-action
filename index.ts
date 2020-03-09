@@ -17,9 +17,16 @@ const EVENTS = {
 
 
 async function run() {
-  const slack = new WebClient(slackClientToken)
+  try {
+    const slack = new WebClient(slackClientToken)
+    slack.chat.postMessage({
+      text: 'Hello world',
+      channel: slackChannel
+    })
+  } catch (e) {
+    core.setFailed('Something wrong with slack credentials!')
+  }
 
-  slack.chat.postMessage('Hello world', slackChannel)
 
   switch(context.eventName) {
     case EVENTS.PUSH:

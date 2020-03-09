@@ -1406,8 +1406,16 @@ function run() {
     return __awaiter(this, void 0, void 0, function () {
         var slack;
         return __generator(this, function (_d) {
-            slack = new WebClient(slackClientToken);
-            slack.chat.postMessage('Hello world', slackChannel);
+            try {
+                slack = new WebClient(slackClientToken);
+                slack.chat.postMessage({
+                    text: 'Hello world',
+                    channel: slackChannel
+                });
+            }
+            catch (e) {
+                core.setFailed('Something wrong with slack credentials!');
+            }
             switch (context.eventName) {
                 case EVENTS.PUSH:
                     if ((_c = (_b = (_a = github.context) === null || _a === void 0 ? void 0 : _a.payload) === null || _b === void 0 ? void 0 : _b.commits) === null || _c === void 0 ? void 0 : _c.length) {
