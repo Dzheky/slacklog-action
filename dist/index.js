@@ -1392,10 +1392,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 var github = __webpack_require__(469);
 var core = __webpack_require__(470);
 var WebClient = __webpack_require__(114).WebClient;
-var githubToken = core.getInput('GITHUB_TOKEN');
 var slackClientToken = core.getInput('SLACK_CLIENT_TOKEN');
 var slackChannel = core.getInput('SLACK_CHANNEL_ID');
-var octokit = new github.GitHub(githubToken);
 var context = github.context;
 var EVENTS = {
     PUSH: 'push',
@@ -1413,7 +1411,8 @@ function run() {
                     if ((_c = (_b = (_a = github.context) === null || _a === void 0 ? void 0 : _a.payload) === null || _b === void 0 ? void 0 : _b.commits) === null || _c === void 0 ? void 0 : _c.length) {
                         console.log(context.payload.commits);
                         context.payload.commits.forEach(function (commit) {
-                            message += "[<" + commit.url + "|" + commit.id.substring(0, 6) + ">] " + commit.message;
+                            var _a = commit.message.split('\n'), title = _a[0], description = _a.slice(1);
+                            message += "[<" + commit.url + "|" + commit.id.substring(0, 7) + ">] *" + title + "*" + (description ? description.join('\n') : '\n') + " - (" + commit.author.name + ")";
                         });
                         slack.chat.postMessage({
                             text: message,

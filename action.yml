@@ -11,9 +11,6 @@ inputs:
   SLACK_CHANNEL_ID:
     description: 'Slack channel id'
     required: true
-  GITHUB_TOKEN:
-    description: 'Github token to access the pullrequests'
-    required: true
 runs:
   using: 'node12'
   main: 'dist/index.js'
