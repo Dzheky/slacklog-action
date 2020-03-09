@@ -1412,7 +1412,7 @@ function run() {
                         console.log(context.payload.commits);
                         context.payload.commits.forEach(function (commit) {
                             var _a = commit.message.split('\n'), title = _a[0], description = _a.slice(1);
-                            message += "[<" + commit.url + "|" + commit.id.substring(0, 7) + ">] *" + title + "* \n " + (description ? description.join('\n') : '\n') + " - (" + commit.author.name + ")\n";
+                            message += "[<" + commit.url + "|" + commit.id.substring(0, 7) + ">] *" + title + "* " + (description ? description.join('\n') : '\n') + " - (" + commit.author.name + ")\n";
                         });
                         slack.chat.postMessage({
                             text: message,
