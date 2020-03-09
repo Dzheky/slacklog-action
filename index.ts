@@ -15,23 +15,41 @@ const EVENTS = {
   PULL_REQUEST: 'pull_request'
 }
 
+interface Commit {
+  author: {
+    email: string,
+    name: string
+  },
+  committer: {
+    email: string,
+    name: string
+  },
+  distinct: boolean,
+  id: string,
+  message: string,
+  timestamp: string,
+  tree_id: string,
+  url: string
+}
+
 
 async function run() {
-  try {
-    const slack = new WebClient(slackClientToken)
-    slack.chat.postMessage({
-      text: 'Hello world',
-      channel: slackChannel
-    })
-  } catch (e) {
-    core.setFailed('Something wrong with slack credentials!')
-  }
+  let message = ''
+  const slack = new WebClient(slackClientToken)
 
 
   switch(context.eventName) {
     case EVENTS.PUSH:
       if (github.context?.payload?.commits?.length) {
         console.log(context.payload.commits)
+        context.payload.commits.forEach((commit: Commit) => {
+          message += `[${commit.id.substring(0, 6)}] ${commit.message}`
+        })
+
+        slack.chat.postMessage({
+          text: message,
+          channel: slackChannel
+        })
       }
   }
   console.log(context)

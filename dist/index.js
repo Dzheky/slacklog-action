@@ -1404,22 +1404,21 @@ var EVENTS = {
 function run() {
     var _a, _b, _c;
     return __awaiter(this, void 0, void 0, function () {
-        var slack;
+        var message, slack;
         return __generator(this, function (_d) {
-            try {
-                slack = new WebClient(slackClientToken);
-                slack.chat.postMessage({
-                    text: 'Hello world',
-                    channel: slackChannel
-                });
-            }
-            catch (e) {
-                core.setFailed('Something wrong with slack credentials!');
-            }
+            message = '';
+            slack = new WebClient(slackClientToken);
             switch (context.eventName) {
                 case EVENTS.PUSH:
                     if ((_c = (_b = (_a = github.context) === null || _a === void 0 ? void 0 : _a.payload) === null || _b === void 0 ? void 0 : _b.commits) === null || _c === void 0 ? void 0 : _c.length) {
                         console.log(context.payload.commits);
+                        context.payload.commits.forEach(function (commit) {
+                            message += "[" + commit.id.substring(0, 6) + "] " + commit.message;
+                        });
+                        slack.chat.postMessage({
+                            text: message,
+                            channel: slackChannel
+                        });
                     }
             }
             console.log(context);
