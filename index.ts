@@ -42,7 +42,7 @@ async function run() {
         console.log(context.payload.commits)
         context.payload.commits.forEach((commit: Commit) => {
           const [title, ...description] = commit.message.split('\n')
-          message += `[<${commit.url}|${commit.id.substring(0, 7)}>] *${title}*${description ? description.join('\n') : '\n'} - (${commit.author.name})`
+          message += `[<${commit.url}|${commit.id.substring(0, 7)}>] *${title}* \n ${description ? description.join('\n') : '\n'} - (${commit.author.name})\n`
         })
 
         slack.chat.postMessage({
