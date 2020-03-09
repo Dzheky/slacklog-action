@@ -1,5 +1,5 @@
 # slacklog-action
-An action to post changelog of the last push to the branch.
+An action to post changelog of your commits to the slack channel.
 
 ###Workflows config
 ```$xslt
