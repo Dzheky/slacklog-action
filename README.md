@@ -1,7 +1,7 @@
 # slacklog-action
 An action to post changelog of your commits to the slack channel.
 
-###Workflows config
+### Workflows config
 ```$xslt
 name: CI
 on:
